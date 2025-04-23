@@ -1,0 +1,97 @@
+#include <iostream>
+#include <string>
+using namespace std;
+
+struct NODE {
+	char c;
+	NODE* prev = nullptr;
+	NODE* next = nullptr;
+};
+
+NODE* arr[600000];
+int cnt = 1;
+NODE* head;
+NODE* cursor;
+
+void insert(char c) {
+	//새 노드 생성
+  arr[cnt] = new NODE;
+	arr[cnt]->c = c;
+  //새 노드의 전후 관계 설정
+	arr[cnt]->prev = cursor;
+	arr[cnt]->next = cursor->next;
+  //노드가 맨 끝에 있다면, 뒷 노드의 정보를 설정할 필요 없음
+	if(cursor->next != nullptr) cursor->next->prev = arr[cnt];
+	//커서는 새 노드의 앞노드가 됨
+  cursor->next = arr[cnt];
+  //커서 재설정
+	cursor = arr[cnt];
+	cnt++;
+}
+
+
+void remove() {
+  //커서 앞노드의 다음 노드는 커서의 뒷노드
+	cursor->prev->next = cursor->next;
+  //커서가 맨 뒤에 있으면 커서 뒷노드의 정보를 설정할 필요 없음
+	if (cursor->next != nullptr) cursor->next->prev = cursor->prev;
+  //커서 재설정
+	cursor = cursor->prev;
+}
+
+int main() {
+	ios::sync_with_stdio(false);
+	cin.tie(NULL);
+	string s;
+	cin >> s;
+	
+  //커서가 맨 앞에 있는 경우를 표현하기 위한 빈노드
+	arr[0] = new NODE; 
+  //이 뒤부터 노드를 생성
+	for (char c : s) {
+		arr[cnt] = new NODE;
+		arr[cnt]->c = c;
+		cnt++;
+	}
+  
+  //각 노드의 전후관계 설정
+	for (int i = 1; i < cnt; i++) {
+		arr[i]->prev = arr[i - 1];
+		arr[i]->next = arr[i + 1];
+	}
+	arr[0]->next = arr[1];
+	arr[cnt - 1]->next = nullptr;
+
+	head = arr[0];
+  //커서가 특정 노드를 가리킨다 -> 그 문자 뒤에 커서가 존재한다는 의미
+	cursor = arr[cnt - 1];
+
+	int M;
+	cin >> M;
+	char cmd, c;
+	for (int i = 0; i < M; i++) {
+		cin >> cmd;
+		switch (cmd) {
+		case 'L':
+			if (cursor->prev != nullptr) cursor = cursor->prev;
+			break;
+		case 'D':
+			if (cursor->next != nullptr) cursor = cursor->next;
+			break;
+		case 'P':
+			cin >> c;
+			insert(c);
+			break;
+		case 'B':
+			if(cursor != arr[0]) remove();
+			break;
+		}
+	}
+
+	for (auto elem = head->next; elem != nullptr; elem = elem->next) {
+		cout << elem->c;
+	}
+
+	for (int i = 0; i < cnt; i++) free(arr[i]);
+	return 0;
+}
