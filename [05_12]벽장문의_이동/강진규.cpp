@@ -1,6 +1,7 @@
 #include <iostream>
 #include <algorithm>
 #include <queue>
+#include <deque>
 #include <set>
 
 using namespace std;
@@ -26,13 +27,14 @@ int main(void) {
 	cin >> m;
 	for (int i = 0;i < m;++i)
 		cin >> use[i];
-	
-	queue<STEP> q;
+
+	//queue<STEP> q;
+	deque<STEP> q;
 	set<STEP> vis;
-	q.push({ left, right, 0, 0 });
+	q.push_back({ left, right, 0, 0 });
 	vis.insert({ left, right, 0, 0 });
 	while (!q.empty()) {
-		STEP cur = q.front(); q.pop();
+		STEP cur = q.front(); q.pop_front();
 		int curLeft = cur.left, curRight = cur.right;
 		int curIdx = cur.idx, curStep = cur.step;
 		if (curIdx >= m) {
@@ -43,7 +45,7 @@ int main(void) {
 			++curIdx;
 			if (vis.find({ curLeft, curRight, curIdx, 0 }) != vis.end()) continue;
 			vis.insert({ curLeft, curRight, curIdx, 0 });
-			q.push({ curLeft,curRight,curIdx,curStep });
+			q.push_front({ curLeft,curRight,curIdx,curStep });
 			continue;
 		}
 		if (use[curIdx] < curLeft) {
@@ -51,19 +53,19 @@ int main(void) {
 			if (nextLeft < 1) continue;
 			if (vis.find({ nextLeft, curRight, curIdx, 0 }) != vis.end()) continue;
 			vis.insert({ nextLeft, curRight, curIdx, 0 });
-			q.push({ nextLeft, curRight, curIdx, curStep + 1 });
+			q.push_back({ nextLeft, curRight, curIdx, curStep + 1 });
 		}
 		else if (use[curIdx] > curLeft && use[curIdx] < curRight) {
 			int nextLeft = curLeft + 1;
 			int nextRight = curRight - 1;
 			if (vis.find({ nextLeft, curRight, curIdx, 0 }) == vis.end()) {
 				vis.insert({ nextLeft, curRight, curIdx, 0 });
-				q.push({ nextLeft, curRight, curIdx, curStep + 1 });
+				q.push_back({ nextLeft, curRight, curIdx, curStep + 1 });
 			}
 
 			if (vis.find({ curLeft, nextRight, curIdx, 0 }) == vis.end()) {
 				vis.insert({ curLeft, nextRight, curIdx, 0 });
-				q.push({ curLeft, nextRight, curIdx, curStep + 1 });
+				q.push_back({ curLeft, nextRight, curIdx, curStep + 1 });
 			}
 		}
 		else {
@@ -71,7 +73,7 @@ int main(void) {
 			if (nextRight > n) continue;
 			if (vis.find({ curLeft, nextRight, curIdx, 0 }) != vis.end()) continue;
 			vis.insert({ curLeft, nextRight, curIdx, 0 });
-			q.push({ curLeft, nextRight, curIdx, curStep + 1 });
+			q.push_back({ curLeft, nextRight, curIdx, curStep + 1 });
 		}
 	}
 	return 0;
