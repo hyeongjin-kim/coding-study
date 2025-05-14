@@ -97,3 +97,65 @@ int main(){
  새 집의 크기는 n*n 크기의 격자판
  행과 열의 번호는 1부터 시작한다
  */
+
+
+
+//---------------------------
+// DP 풀이  
+
+
+#include <iostream>
+
+using namespace std;
+
+#define MAX_N 37
+
+int board[MAX_N][MAX_N];
+long long dp[MAX_N][MAX_N][3];
+int n;
+
+bool InRange(int x, int y){
+    return x >= 1 && x <= n && y >= 1 && y<= n;
+}
+
+int main(){
+    
+    ios::sync_with_stdio(false);
+    cin.tie(0);
+    
+    cin >> n;
+    
+    for(int i=1; i<=n; i++){
+        for(int j=1; j<=n; j++){
+            cin >> board[i][j];
+        }
+    }
+    
+    // dp[x][y][0] : 가로, dp[x][y][1] : 세로, dp[x][y][2] : 대각선
+    
+    dp[1][2][0] = 1; // (1,1) ~ (1,2) 가로로 왔을 때 까지 경우의 수
+    
+    for(int i=1; i<=n; i++){
+        for(int j=3; j<=n; j++){
+            
+            if(board[i][j] == 1){
+                dp[i][j][0] = 0;
+                dp[i][j][1] = 0;
+                dp[i][j][2] = 0;
+                continue;
+            }
+                
+            if(InRange(i,j-1))
+                dp[i][j][0] = dp[i][j-1][0] + dp[i][j-1][2];
+            if(InRange(i-1,j))
+                dp[i][j][1] = dp[i-1][j][1] + dp[i-1][j][2];
+            if(InRange(i-1,j-1) && board[i-1][j] == 0 && board[i][j-1] == 0)
+                dp[i][j][2] = dp[i-1][j-1][0] + dp[i-1][j-1][1] + dp[i-1][j-1][2];
+        }
+    }
+    
+    cout << dp[n][n][0] + dp[n][n][1] + dp[n][n][2];
+    
+    return 0;
+}
+
