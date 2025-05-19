@@ -1,18 +1,18 @@
 def minimal_key_length(v):
-    """
-    벡터 v의 최소 키 길이(k)를 반환.
-    k 는 v[i] == v[i % k] 가 모든 i에 성립하도록 하는 가장 작은 k.
-    """
-    n = len(v)
+    # 벡터 v의 최소 키 길이(k)를 반환.
+    #k 는 v[i] == v[i % k] 가 모든 i에 성립하도록 하는 가장 작은 k.
+    
     # 1) π 함수 계산
+    n = len(v)
     pi = [0] * n
     j = 0
-    for i in range(1, n):
-        while j > 0 and v[i] != v[j]:
-            j = pi[j - 1]
+    for idx in range(1, n):
+        while jdx > 0 and v[idx] != v[jdx]:
+            jdx = pi[jdx - 1]
         if v[i] == v[j]:
-            j += 1
-        pi[i] = j
+            jdx += 1
+        pi[idx] = jdx
+        
     # 2) 최소 키 길이
     k = n - pi[-1]
     return k
