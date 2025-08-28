@@ -12,34 +12,9 @@
   <summary>4월 문제 풀이</summary>
 | 문제 이름 (링크) | 강진규 | 김동연 | 김형진 | 유환성 | 이신 | 이한설 | 홍성표 |
 |---|---|---|---|---|---|---|---|
+  
 | [문제 A](https://example.com) | [ ] | [x] | [ ] | [ ] | [x] | [ ] | [x] |
 | [문제 B](https://example.com) | [ ] | [x] | [ ] | [ ] | [x] | [ ] | [x] |
-| [문제 C](https://example.com) | [ ] | [x] | [ ] | [ ] | [x] | [ ] | [x] |
-| [문제 C](https://example.com) | [ ] | [x] | [ ] | [ ] | [x] | [ ] | [x] |
-| [문제 C](https://example.com) | [ ] | [x] | [ ] | [ ] | [x] | [ ] | [x] |
-| [문제 C](https://example.com) | [ ] | [x] | [ ] | [ ] | [x] | [ ] | [x] |
-| [문제 C](https://example.com) | [ ] | [x] | [ ] | [ ] | [x] | [ ] | [x] |
-| [문제 C](https://example.com) | [ ] | [x] | [ ] | [ ] | [x] | [ ] | [x] |
-| [문제 C](https://example.com) | [ ] | [x] | [ ] | [ ] | [x] | [ ] | [x] |
-| [문제 C](https://example.com) | [ ] | [x] | [ ] | [ ] | [x] | [ ] | [x] |
-| [문제 C](https://example.com) | [ ] | [x] | [ ] | [ ] | [x] | [ ] | [x] |
-| [문제 C](https://example.com) | [ ] | [x] | [ ] | [ ] | [x] | [ ] | [x] |
-| [문제 C](https://example.com) | [ ] | [x] | [ ] | [ ] | [x] | [ ] | [x] |
-| [문제 C](https://example.com) | [ ] | [x] | [ ] | [ ] | [x] | [ ] | [x] |
-| [문제 C](https://example.com) | [ ] | [x] | [ ] | [ ] | [x] | [ ] | [x] |
-| [문제 C](https://example.com) | [ ] | [x] | [ ] | [ ] | [x] | [ ] | [x] |
-| [문제 C](https://example.com) | [ ] | [x] | [ ] | [ ] | [x] | [ ] | [x] |
-| [문제 C](https://example.com) | [ ] | [x] | [ ] | [ ] | [x] | [ ] | [x] |
-| [문제 C](https://example.com) | [ ] | [x] | [ ] | [ ] | [x] | [ ] | [x] |
-| [문제 A](https://example.com) | [ ] | [x] | [ ] | [ ] | [x] | [ ] | [x] |
-| [문제 B](https://example.com) | [ ] | [x] | [ ] | [ ] | [x] | [ ] | [x] |
-| [문제 C](https://example.com) | [ ] | [x] | [ ] | [ ] | [x] | [ ] | [x] |
-| [문제 C](https://example.com) | [ ] | [x] | [ ] | [ ] | [x] | [ ] | [x] |
-| [문제 C](https://example.com) | [ ] | [x] | [ ] | [ ] | [x] | [ ] | [x] |
-| [문제 C](https://example.com) | [ ] | [x] | [ ] | [ ] | [x] | [ ] | [x] |
-| [문제 C](https://example.com) | [ ] | [x] | [ ] | [ ] | [x] | [ ] | [x] |
-| [문제 C](https://example.com) | [ ] | [x] | [ ] | [ ] | [x] | [ ] | [x] |
-| [문제 C](https://example.com) | [ ] | [x] | [ ] | [ ] | [x] | [ ] | [x] |
 | [문제 C](https://example.com) | [ ] | [x] | [ ] | [ ] | [x] | [ ] | [x] |
 
 </details>
