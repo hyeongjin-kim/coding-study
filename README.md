@@ -18,8 +18,8 @@
 | [문제 B](https://example.com) | | | | | | | |
 | [문제 C](https://example.com) | | | | | | | |
 
-- [ ]
-* [ ]
+[ ]
+[ ]
 </details>
 ---
 ---
