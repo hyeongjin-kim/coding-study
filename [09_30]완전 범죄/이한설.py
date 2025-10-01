@@ -1,7 +1,7 @@
 def solution(info, n, m):
     Length = len(info)
 
-    dp = [[[-1] * m for _ in range(n)] for _ in range(Length + 1)]
+    dp = [[[-1] * m for _ in range(n)] for _ in range(Length + 1)] # 3차원으로 잡고 세로 A, 가로 B, 차원(첫번째 인덱스) 물건의 인덱스
     dp[0][0][0] = 0 
 
     for idx, (n_w, m_w) in enumerate(info):
