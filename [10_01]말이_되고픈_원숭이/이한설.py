@@ -34,5 +34,4 @@ while q:
                 visited[nx][ny][cnt + 1] = visited[cx][cy][cnt] + 1
                 q.append([nx, ny, cnt + 1])
 
-else:
-    print(-1)
+print(-1)
