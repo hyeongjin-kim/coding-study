@@ -1,57 +1,65 @@
 #include <iostream>
-#include <algorithm>
 #include <vector>
+#include <algorithm>
 #include <cmath>
+
 using namespace std;
+int arr[100000];
+int t;
 
-int N;
-vector<int> liquid;
+int main()
+{
+    scanf("%d", &t);
+    
+    for(int i =0; i<t ; i++)
+        scanf("%d", &arr[i]);
+    
+    sort(arr,arr+t);
+    int s = 0;
+    int e = t - 1;
+    int m = 21e8;
+    pair<int,int>res ={0,0};
+    for(;;)
+    {
+        if(s >= e || e <= s) break;
+        
+        int p1 = arr[s];
+        int p2 = arr[e];
+        int sum = abs(p1 + p2);
+        //cout<<sum <<" "<<m<<"\n";
 
-struct item {
-	int dif;
-	int l1;
-	int l2;
-};
+        
+        if(sum <= m)
+        {
+            if(p1 + p2<0)
+            {
+                m = sum;
+                res={s,e};
+                s++;
+            }
+            if(p1 + p2>=0)
+            {
+                m = sum;
+                res={s,e};
+                e--;
+            }
 
-void input() {
-	cin >> N;
-	for (int i = 0; i < N; i++) {
-		int val;
-		cin >> val;
-		liquid.push_back(val);
-	}
-	sort(liquid.begin(), liquid.end());
-}
-void solution() {
-	
-	item ans;
-	ans.dif = 21e8;
-
-	int sp = 0;
-	int ep = N - 1;
-
-	while (sp < ep) {
-		if (ans.dif == 0) break;
-
-		int dif = liquid[sp] + liquid[ep];
-
-		if (ans.dif > abs(dif)) {
-			ans.dif = abs(dif);
-			ans.l1 = liquid[sp];
-			ans.l2 = liquid[ep];
-		}
-
-		if (dif < 0) sp++;
-		else if (dif > 0) ep--;
-	}
-
-	cout << ans.l1 << " " << ans.l2;
-}
-
-int main() {
-
-	input();
-	solution();
-
-	return 0;
+        }
+            
+        if(sum > m)
+        {
+            if(p1 + p2<0)
+            {
+                s++;
+            }
+            if(p1 + p2>=0)
+            {
+                e--;
+            }
+        }
+    }
+    
+    cout<<arr[res.first]<<" "<<arr[res.second];
+    
+    return 0;
 }
