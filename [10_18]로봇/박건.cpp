@@ -7,7 +7,6 @@
 #include <climits>
 #include <algorithm>
 #include <unordered_map>
-#include <cstring>
 
 #define endl '\n'
 #define LIM 987654321
@@ -23,6 +22,9 @@ struct node {
 const int dy[] = { 0, 0, 1, -1 };
 const int dx[] = { 1, -1, 0, 0 };
 
+const int tleft[] = {3, 2, 0, 1};
+const int tright[] = { 2, 3, 1, 0 };
+
 int n, m;
 int board[102][102];
 int dist[102][102][4];
@@ -34,20 +36,6 @@ bool isRange(int y, int x) {
 	return y >= 1 && y <= m && x >= 1 && x <= n;
 }
 
-int calCo(int ch, int nh) {
-	if (nh > ch) {
-		int temp = ch;
-		ch = nh;
-		nh = temp;
-	}
-
-	if (ch == nh) return 0;
-	if (ch - nh == 1) return 1;
-	if (ch - nh == 2) return 2;
-	if (ch - nh == 3) return 1;
-
-}
-
 int main() {
 	ios::sync_with_stdio(0);
 	cin.tie(0);
@@ -56,8 +44,8 @@ int main() {
 
 	cin >> m >> n;
 
-	for (int i = 0; i < m; i++) {
-		for (int j = 0; j < n; j++) {
+	for (int i = 1; i <= m; i++) {
+		for (int j = 1; j <= n; j++) {
 			cin >> board[i][j];
 		}
 	}
@@ -66,8 +54,8 @@ int main() {
 
 	cin >> sy >> sx >> sh >> ey >> ex >> eh;
 
-	sh -= 1;
-	eh -= 1;
+	--sh;
+	--eh;
 	
 	dq.push_back({ sy, sx, sh });
 	dist[sy][sx][sh] = 0;
@@ -75,24 +63,31 @@ int main() {
 	while (!dq.empty()) {
 		node cur = dq.front(); dq.pop_front();
 
-		for (int i = 0; i < 4; i++) {
-			int ny = cur.y + dy[i];
-			int nx = cur.x + dx[i];
-			int cost = calCo(cur.h, i);
-			bool isTurn = cost ? true : false;
+		// 왼쪽 회전
+		int nh = tleft[cur.h];
+		if (dist[cur.y][cur.x][nh] == -1) {
+			dist[cur.y][cur.x][nh] = dist[cur.y][cur.x][cur.h] + 1;
+			dq.push_back({ cur.y, cur.x, nh });
+		}
 
-			if (!isRange(ny, nx)) continue;
-			if (board[ny][nx] == 1) continue;
-			if (dist[ny][nx][i] != -1) continue;
+		// 오른쪽 회전
+		nh = tright[cur.h];
+		if (dist[cur.y][cur.x][nh] == -1) {
+			dist[cur.y][cur.x][nh] = dist[cur.y][cur.x][cur.h] + 1;
+			dq.push_back({ cur.y, cur.x, nh });
+		}
 
-			if (isTurn) {
-				dist[ny][nx][i] = dist[cur.y][cur.x][cur.h] + cost + 1;
-			}
-			else {
-				dist[ny][nx][i] = dist[cur.y][cur.x][cur.h];
-			}
-			dq.push_back({ ny,nx,i });
-			
+		for (int i = 1; i <= 3; i++) {
+			int ny = cur.y + dy[cur.h] * i;
+			int nx = cur.x + dx[cur.h] * i;
+
+			if (!isRange(ny, nx)) break;
+			if (board[ny][nx] == 1) break;
+			if (dist[ny][nx][cur.h] != -1) continue;
+
+			dist[ny][nx][cur.h] = dist[cur.y][cur.x][cur.h] + 1;
+			dq.push_back({ ny, nx, cur.h });
+
 		}
 
 	}
