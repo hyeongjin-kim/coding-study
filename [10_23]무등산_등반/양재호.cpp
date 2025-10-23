@@ -1,30 +1,25 @@
 #include <iostream>
-#include <vector>
-#include <string>
-#include <algorithm>
 #include <queue>
-#include <stack>
-#include <map>
-#include <unordered_map>
 #include <climits>
 #include <memory.h>
 
 using namespace std;
 
-int n, m, a, b, c;
-int sy, sx;
+short n, m;
+int a, b, c;
+short sy, sx;
 struct node {
+	short y;
+    short x;
 	int cost;
-	int y;
-	int x;
-	bool operator <(node right) const {
+	bool operator <(const node& right) const {
 		return cost > right.cost;
 	}
 };
-int ydir[] = { -1, 1, 0, 0 };
-int xdir[] = { 0, 0, -1, 1 };
-int arr[505][505];
-int dist[505][505];
+short ydir[] = { -1, 1, 0, 0 };
+short xdir[] = { 0, 0, -1, 1 };
+int arr[501][501];
+int dist[501][501];
 int Max, Max_y, Max_x;
 
 void dijkstra(int y, int x) {
@@ -32,7 +27,7 @@ void dijkstra(int y, int x) {
 		fill(dist[i], dist[i] + m + 1, INT_MAX);
 	}
 	priority_queue<node> pq;
-	pq.push({ 0, y, x });
+	pq.push({ y, x, 0 });
 	dist[y][x] = 0;
 
 	while (!pq.empty()) {
@@ -41,21 +36,18 @@ void dijkstra(int y, int x) {
 		if (dist[now.y][now.x] < now.cost) continue;
 		
 		for (int i = 0; i < 4; i++) {
-			int ny = now.y + ydir[i];
-			int nx = now.x + xdir[i];
-			if (ny < 1 || nx < 1 || ny > n || nx > m) continue;
-			if (dist[ny][nx] <= now.cost) continue;
-
+			short ny = now.y + ydir[i];
+			short nx = now.x + xdir[i];
 			int nextcost;
-			
+			if (ny < 1 || nx < 1 || ny > n || nx > m) continue;
+            if (dist[ny][nx] <= now.cost) continue;
 			if (abs(arr[ny][nx] - arr[now.y][now.x]) > c) continue;
 			if (arr[ny][nx] > arr[now.y][now.x]) nextcost = now.cost + (arr[ny][nx] - arr[now.y][now.x]) * a;
 			else if (arr[ny][nx] < arr[now.y][now.x]) nextcost = now.cost + (arr[now.y][now.x] - arr[ny][nx]) * b;
 			else nextcost = now.cost + 1;
-
 			if (dist[ny][nx] <= nextcost) continue;
 			dist[ny][nx] = nextcost;
-			pq.push({ nextcost, ny, nx });
+			pq.push({ ny, nx, nextcost });
 		}
 	}
 }
