@@ -41,10 +41,12 @@ void dijkstra(int y, int x) {
 			int nextcost;
 			if (ny < 1 || nx < 1 || ny > n || nx > m) continue;
             if (dist[ny][nx] <= now.cost) continue;
+			
 			if (abs(arr[ny][nx] - arr[now.y][now.x]) > c) continue;
 			if (arr[ny][nx] > arr[now.y][now.x]) nextcost = now.cost + (arr[ny][nx] - arr[now.y][now.x]) * a;
 			else if (arr[ny][nx] < arr[now.y][now.x]) nextcost = now.cost + (arr[now.y][now.x] - arr[ny][nx]) * b;
 			else nextcost = now.cost + 1;
+			
 			if (dist[ny][nx] <= nextcost) continue;
 			dist[ny][nx] = nextcost;
 			pq.push({ ny, nx, nextcost });
