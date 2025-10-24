@@ -39,13 +39,24 @@ void move() {
 		for (int j = 1; j <= N; j++) {
 			while (!board[i][j].empty()) {
 				fireball cur = board[i][j].front(); board[i][j].pop_front();
+				int nr = cur.r + dy[cur.d] * cur.s;
+				int nc = cur.c + dx[cur.d] * cur.s;
 
-				int ns = cur.s % N;
+				if (nr > N) {
+					nr %= N;
+				}
 
-				int nr = ((cur.r - 1 + dy[cur.d] * ns) % N + N) % N + 1;
-				int nc = ((cur.c - 1 + dx[cur.d] * ns) % N + N) % N + 1;
-				
+				if (nr < 1) {
+					nr = (nr % N) + N;
+				}
 
+				if (nc > N) {
+					nc %= N;
+				}
+
+				if (nc < 1) {
+					nc = (nc % N) + N;
+				}
 				
 				temp.push_back({ nr, nc, cur.m, cur.s, cur.d });
 			}
